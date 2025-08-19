@@ -7,4 +7,7 @@ urlpatterns = [
     path('transactions/<int:pk>/', views.transaction_detail),
     path('analytics/spend-by-category/', views.spend_by_category),
     path('seed/', views.seed_defaults),
+    path('analytics/monthly-category-totals/', views.monthly_category_totals),
+    path('transactions/clear/', views.delete_transaction),
+
 ]
