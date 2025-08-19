@@ -333,3 +333,13 @@ def monthly_category_totals(request):
 def delete_transaction(request):
     Transaction.objects.all().delete()
     return Response({'status': 'All transactions deleted'})
+
+# tracker/views.py
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(["GET"])
+def health(request):
+    return Response({"ok": True})
+
+
