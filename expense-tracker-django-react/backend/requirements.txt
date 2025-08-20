@@ -4,4 +4,5 @@ django-cors-headers>=4.2
 whitenoise>=6.6
 uvicorn[standard]>=0.29
 dj-database-url>=2.2
+python-dateutil>=2.82
 
