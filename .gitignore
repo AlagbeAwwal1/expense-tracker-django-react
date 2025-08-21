@@ -1,0 +1,87 @@
+# -------------------------
+# OS junk
+# -------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+$RECYCLE.BIN/
+
+# -------------------------
+# Editors / IDEs
+# -------------------------
+.vscode/
+.idea/
+*.code-workspace
+
+# -------------------------
+# Python / Django
+# -------------------------
+# virtualenvs
+.venv/
+venv/
+ENV/
+env/
+backend/.venv/
+
+# bytecode & build
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+build/
+dist/
+pip-wheel-metadata/
+
+# tests & typing
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Django local stuff
+*.log
+local_settings.py
+
+# SQLite dev DB (keep if you really want it versioned—usually you don't)
+db.sqlite3
+db.sqlite3-journal
+
+# collectstatic output
+staticfiles/
+backend/staticfiles/
+
+# (keep migrations, just ignore their pycache)
+*/migrations/__pycache__/
+
+# -------------------------
+# Node / Frontend
+# -------------------------
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+.eslintcache
+
+# Vite build output (don’t commit; Vercel/Render will build)
+dist/
+frontend/dist/
+
+# Tailwind / tooling caches
+*.cache
+.tailwind*
+.parcel-cache/
+
+# -------------------------
+# Environment / secrets
+# -------------------------
+.env
+.env.*
+!.env.example
