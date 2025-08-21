@@ -1,6 +1,3 @@
-Got you! Here’s a single, polished **`README.md`** you can copy–paste into your repo root.
-
-````markdown
 # 💸 Expense Tracker — Django + React (Vite, Tailwind, shadcn/ui)
 
 A batteries-included expense tracker you can run locally or deploy in minutes.  
@@ -35,23 +32,22 @@ cd ../frontend
 npm ci
 echo VITE_API_BASE=http://127.0.0.1:8000/api > .env
 npm run dev                       # http://localhost:5173
-````
+```
 
 ---
 
 ## ✨ Features
 
-* **CSV ingestion** → server parses & stores transactions
-* **Auto-categorization** via keyword rules (merchant + description)
-* **Inline category edits** per transaction
-* **Analytics**
-
-  * Donut: *Spend by Category* (selected month)
-  * Stacked Bar: *Monthly breakdown* across categories
-* **Nice UI**: Tailwind v4 + shadcn/ui (+ Recharts)
-* **REST API** (Django REST Framework)
-* **“Clear All”** with confirmation dialog
-* **Prod-ready**: CORS/CSRF, collectstatic, ASGI, health endpoint
+- **CSV ingestion** → server parses & stores transactions
+- **Auto-categorization** via keyword rules (merchant + description)
+- **Inline category edits** per transaction
+- **Analytics**
+  - Donut: *Spend by Category* (selected month)
+  - Stacked Bar: *Monthly breakdown* across categories
+- **Nice UI**: Tailwind v4 + shadcn/ui (+ Recharts)
+- **REST API** (Django REST Framework)
+- **“Clear All”** with confirmation dialog
+- **Prod-ready**: CORS/CSRF, collectstatic, ASGI, health endpoint
 
 ---
 
@@ -81,13 +77,11 @@ expense-tracker-django-react/
 ## 🔧 Local Development
 
 ### Prereqs
-
-* Python **3.11+**
-* Node.js **18+** (or 20+)
-* Git
+- Python **3.11+**
+- Node.js **18+** (or 20+)
+- Git
 
 ### Backend (Django)
-
 ```bash
 cd backend
 python -m venv .venv
@@ -100,18 +94,15 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver 8000
 ```
-
 Your API lives at `http://127.0.0.1:8000/api/`.
 
 ### Frontend (Vite + React)
-
 ```bash
 cd frontend
 npm ci
 echo VITE_API_BASE=http://127.0.0.1:8000/api > .env
 npm run dev
 ```
-
 Open `http://localhost:5173`.
 
 > **Important:** `VITE_API_BASE` **must include `/api`** (no trailing slash needed).
@@ -129,8 +120,8 @@ date,merchant,description,amount,type
 2025-08-01,COSTCO,Groceries,-83,debit
 ```
 
-* **amount**: negative for debits (spend), positive for credits (income).
-* Unknown categories default to **Other** (you can edit inline).
+- **amount**: negative for debits (spend), positive for credits (income).
+- Unknown categories default to **Other** (you can edit inline).
 
 ---
 
@@ -138,17 +129,17 @@ date,merchant,description,amount,type
 
 Base URL: `…/api/`
 
-| Method | Path                                         | Description                                |
-| -----: | :------------------------------------------- | :----------------------------------------- |
-|    GET | `health/`                                    | Health check → `{"ok": true}`              |
-|   POST | `files/`                                     | Upload CSV (`file` form field)             |
-|    GET | `transactions/?month=YYYY-MM`                | List transactions (optional month filter)  |
-|  PATCH | `transactions/<id>/`                         | Update (`{"category": "Dining"}`)          |
-| DELETE | `transactions/clear/`                        | **Dangerous**: delete all transactions     |
-|    GET | `analytics/spend-by-category/?month=YYYY-MM` | Donut data                                 |
-|    GET | `analytics/monthly-category-totals/`         | Stacked monthly category totals            |
-|    GET | `categories/`                                | Read-only rules + categories               |
-|   POST | `seed/`                                      | Seed default categories/rules (idempotent) |
+| Method  | Path                                        | Description                                          |
+|--------:|:--------------------------------------------|:-----------------------------------------------------|
+| GET     | `health/`                                   | Health check → `{"ok": true}`                        |
+| POST    | `files/`                                    | Upload CSV (`file` form field)                       |
+| GET     | `transactions/?month=YYYY-MM`               | List transactions (optional month filter)            |
+| PATCH   | `transactions/<id>/`                        | Update (`{"category": "Dining"}`)                    |
+| DELETE  | `transactions/clear/`                       | **Dangerous**: delete all transactions               |
+| GET     | `analytics/spend-by-category/?month=YYYY-MM`| Donut data                                           |
+| GET     | `analytics/monthly-category-totals/`        | Stacked monthly category totals                      |
+| GET     | `categories/`                               | Read-only rules + categories                         |
+| POST    | `seed/`                                     | Seed default categories/rules (idempotent)           |
 
 > Tip: ping `…/api/health/` to “wake” free backends before first use.
 
@@ -174,35 +165,28 @@ View them in the UI via the **Rules** card (`GET /api/categories/`).
 
 ## 🖼 Frontend Notes
 
-* **Tailwind v4**: Just `@import "tailwindcss";` in `src/index.css`.
-* **shadcn/ui**: Card, Button, Input, Table, AlertDialog, etc.
-* **Recharts**: Donut (PieChart) + Stacked BarChart.
-* **Env vars**: `VITE_API_BASE` is compiled at build time → update per environment.
+- **Tailwind v4**: Just `@import "tailwindcss";` in `src/index.css`.
+- **shadcn/ui**: Card, Button, Input, Table, AlertDialog, etc.
+- **Recharts**: Donut (PieChart) + Stacked BarChart.
+- **Env vars**: `VITE_API_BASE` is compiled at build time → update per environment.
 
 ---
 
 ## ☁️ Deployment
 
 ### Backend on **Render**
-
-* **Service**: Web Service → Runtime: **Python** → Root Directory: `backend`
-
-* **Build Command**
-
+- **Service**: Web Service → Runtime: **Python** → Root Directory: `backend`
+- **Build Command**
   ```bash
   pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
   ```
-
-* **Start Command** (ASGI)
-
+- **Start Command** (ASGI)
   ```bash
   /opt/render/project/src/.venv/bin/uvicorn config.asgi:application --host 0.0.0.0 --port $PORT
   ```
-
   > Replace `config` with your Django project module if different.
 
-* **Environment Variables**
-
+- **Environment Variables**
   ```ini
   DJANGO_SECRET_KEY=<long-random-string>
   DEBUG=False
@@ -210,22 +194,19 @@ View them in the UI via the **Rules** card (`GET /api/categories/`).
   CORS_ALLOWED_ORIGINS=https://<your-frontend>.vercel.app,http://localhost:5173
   CSRF_TRUSTED_ORIGINS=https://<your-frontend>.vercel.app
   ```
-
-* **Free tier sleeps** after inactivity; first request may take a few seconds.
+- **Free tier sleeps** after inactivity; first request may take a few seconds.
 
 ### Frontend on **Vercel**
-
-* **Root Directory**: `frontend`
-* **Framework Preset**: Vite
-* **Install Command**: `npm ci --no-audit --no-fund`
-* **Build Command**: `npm run build`
-* **Output Directory**: `dist`
-* **Environment Variables** (Production & Preview)
-
+- **Root Directory**: `frontend`
+- **Framework Preset**: Vite
+- **Install Command**: `npm ci --no-audit --no-fund`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variables** (Production & Preview)
   ```ini
   VITE_API_BASE=https://<your-backend>.onrender.com/api
   ```
-* After changing env vars, **redeploy** (Vite embeds them at build time).
+- After changing env vars, **redeploy** (Vite embeds them at build time).
 
 ---
 
@@ -245,28 +226,28 @@ open http://localhost:5173
 
 ## 🛠 Troubleshooting
 
-* **Red “Not Found” HTML in UI**
+- **Red “Not Found” HTML in UI**  
   Frontend is calling itself, not the backend. Set `VITE_API_BASE` to your **backend** and include `/api`.
 
-* **CORS/CSRF errors**
+- **CORS/CSRF errors**  
   Add your frontend origin to `CORS_ALLOWED_ORIGINS` & `CSRF_TRUSTED_ORIGINS`; redeploy backend.
 
-* **`no such table: tracker_transaction`**
+- **`no such table: tracker_transaction`**  
   Run `python manage.py migrate`.
 
-* **DELETE `/clear` breaks because empty body**
+- **DELETE `/clear` breaks because empty body**  
   Handle `204 No Content` safely (don’t always `res.json()`).
 
-* **Vite can’t find `tailwindcss`**
+- **Vite can’t find `tailwindcss`**  
   `npm ci`. Ensure `src/index.css` has `@import "tailwindcss";`.
 
-* **Vite ESM / “CJS API deprecated”**
+- **Vite ESM / “CJS API deprecated”**  
   Ensure `package.json` has `"type": "module"`. Use `.cjs` for configs that are CommonJS.
 
-* **Port 5173 busy**
+- **Port 5173 busy**  
   `npm run dev -- --port 5173` or kill the process using that port.
 
-* **Free backend is sleeping**
+- **Free backend is sleeping**  
   Ping `…/api/health/` first; or set up an external ping (UptimeRobot) to keep it warm.
 
 ---
@@ -274,7 +255,6 @@ open http://localhost:5173
 ## 🧾 Useful Scripts
 
 **Backend**
-
 ```bash
 python manage.py runserver 8000
 python manage.py makemigrations && python manage.py migrate
@@ -282,7 +262,6 @@ curl -X POST http://127.0.0.1:8000/api/seed/
 ```
 
 **Frontend**
-
 ```bash
 npm run dev
 npm run build
@@ -293,20 +272,20 @@ npm run preview
 
 ## 🔐 Security
 
-* Don’t commit `.env` or prod DBs.
-* Rotate `DJANGO_SECRET_KEY` for public repos.
-* If using Postgres on Render, set `DATABASE_URL` and install `psycopg[binary]`.
+- Don’t commit `.env` or prod DBs.
+- Rotate `DJANGO_SECRET_KEY` for public repos.
+- If using Postgres on Render, set `DATABASE_URL` and install `psycopg[binary]`.
 
 ---
 
 ## 🧭 Roadmap
 
-* ✅ CSV ingestion, categorization, analytics
-* [ ] Category management UI (custom rules & ordering)
-* [ ] Authentication (multi-user)
-* [ ] Budgets & alerts
-* [ ] Export to CSV/XLSX
-* [ ] Multi-currency support
+- ✅ CSV ingestion, categorization, analytics  
+- [ ] Category management UI (custom rules & ordering)  
+- [ ] Authentication (multi-user)  
+- [ ] Budgets & alerts  
+- [ ] Export to CSV/XLSX  
+- [ ] Multi-currency support  
 
 ---
 
@@ -319,9 +298,3 @@ PRs welcome! Open an issue for ideas/bugs. Keep commits descriptive and run lint
 ## 📝 License
 
 MIT © 2025 — Replace with your preferred license if needed.
-
-```
-
-Want me to drop in your **actual** Render + Vercel URLs so it’s copy-perfect for your project? Send them and I’ll slot them in.
-::contentReference[oaicite:0]{index=0}
-```
